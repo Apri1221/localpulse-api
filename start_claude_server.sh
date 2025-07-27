@@ -136,7 +136,7 @@ start_server() {
     fi
 
     # Start server in background
-    echo "🚀 Starting server on http://localhost:8081 in background..."
+    echo "🚀 Starting server on http://0.0.0.0:8081 in background..."
     echo "📋 Logs will be written to: $LOGFILE"
     
     cd "$SCRIPT_DIR"
@@ -191,7 +191,7 @@ status_server() {
         PID=$(cat "$PIDFILE")
         if kill -0 $PID 2>/dev/null; then
             echo "✅ LocalPulse server is running (PID: $PID)"
-            echo "🌐 URL: http://localhost:8081"
+            echo "🌐 URL: http://0.0.0.0:8081"
             echo "📋 Logs: tail -f $LOGFILE"
         else
             echo "❌ Server not running (stale PID file)"
