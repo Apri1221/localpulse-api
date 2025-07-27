@@ -32,10 +32,10 @@ start_server() {
             processes_found=true
         fi
         
-        # Kill any Flask processes on port 8000
-        if lsof -i :8000 > /dev/null 2>&1; then
-            echo "🔴 Killing processes using port 8000..."
-            lsof -ti :8000 | xargs kill -9 2>/dev/null || true
+        # Kill any Flask processes on port 8081
+        if lsof -i :8081 > /dev/null 2>&1; then
+            echo "🔴 Killing processes using port 8081..."
+            lsof -ti :8081 | xargs kill -9 2>/dev/null || true
             processes_found=true
         fi
         
@@ -69,18 +69,18 @@ start_server() {
 
     # Function to verify port is free
     check_port_availability() {
-        if lsof -i :8000 > /dev/null 2>&1; then
-            echo "❌ Port 8000 is still in use. Attempting force cleanup..."
-            lsof -ti :8000 | xargs kill -9 2>/dev/null || true
+        if lsof -i :8081 > /dev/null 2>&1; then
+            echo "❌ Port 8081 is still in use. Attempting force cleanup..."
+            lsof -ti :8081 | xargs kill -9 2>/dev/null || true
             sleep 1
             
-            if lsof -i :8000 > /dev/null 2>&1; then
-                echo "❌ ERROR: Unable to free port 8000. Manual intervention required."
-                echo "Run: lsof -i :8000 to see what's using the port"
+            if lsof -i :8081 > /dev/null 2>&1; then
+                echo "❌ ERROR: Unable to free port 8081. Manual intervention required."
+                echo "Run: lsof -i :8081 to see what's using the port"
                 exit 1
             fi
         fi
-        echo "✅ Port 8000 is available"
+        echo "✅ Port 8081 is available"
     }
 
     # Kill related processes
@@ -136,7 +136,7 @@ start_server() {
     fi
 
     # Start server in background
-    echo "🚀 Starting server on http://localhost:8000 in background..."
+    echo "🚀 Starting server on http://localhost:8081 in background..."
     echo "📋 Logs will be written to: $LOGFILE"
     
     cd "$SCRIPT_DIR"
@@ -191,7 +191,7 @@ status_server() {
         PID=$(cat "$PIDFILE")
         if kill -0 $PID 2>/dev/null; then
             echo "✅ LocalPulse server is running (PID: $PID)"
-            echo "🌐 URL: http://localhost:8000"
+            echo "🌐 URL: http://localhost:8081"
             echo "📋 Logs: tail -f $LOGFILE"
         else
             echo "❌ Server not running (stale PID file)"
