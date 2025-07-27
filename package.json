@@ -1,0 +1,24 @@
+{
+  "name": "localpulse-ai",
+  "version": "1.0.0",
+  "description": "LocalPulse.AI - Intelligent Banking and Economic Analysis Platform",
+  "main": "frontend/index.html",
+  "scripts": {
+    "dev": "python api.py",
+    "start": "python api.py",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "banking",
+    "economics",
+    "ai",
+    "geospatial",
+    "indonesia",
+    "claude"
+  ],
+  "author": "LocalPulse Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,4 @@
+bi-venv
+.env
+localpulse.log
+*.cpython*
