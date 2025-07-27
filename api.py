@@ -4,9 +4,39 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from rag import ClaudeService
 from datetime import datetime
+from flask_compress import Compress
 
+# cors
 app = Flask(__name__)
 CORS(app)
+
+
+
+app.config['COMPRESS_MIMETYPES'] = [
+    'text/html',
+    'text/css', 
+    'text/xml',
+    'text/plain',
+    'text/javascript',
+    'application/json',
+    'application/javascript',
+    'application/xml+rss',
+    'application/atom+xml',
+    'image/svg+xml'
+]
+
+app.config['COMPRESS_LEVEL'] = 6  # Compression level 1-9 (6 balance)
+app.config['COMPRESS_MIN_SIZE'] = 500  # responses > 500 bytes
+app.config['COMPRESS_CACHE_KEY'] = None  # Disable caching karena kita bukan static response
+app.config['COMPRESS_CACHE_TIMEOUT'] = 5 * 60  # Cache 5 menit
+app.config['COMPRESS_STREAMS'] = True  # Enable streaming compression
+
+
+# compress
+compress = Compress()
+compress.init_app(app) # otomatis
+
+
 
 # Initialize Claude service
 CLAUDE_API_KEY = os.getenv('CLAUDE_API_KEY')
